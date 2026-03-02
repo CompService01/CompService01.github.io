@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompService | Ремонт компьютеров</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Arial', 'Helvetica', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .card {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 5px;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .services {
+            margin: 30px 0;
+        }
+        
+        .service-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s;
+            border-left: 5px solid #667eea;
+        }
+        
+        .service-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .service-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .service-price {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .contact h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .telegram-link {
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 20px;
+            display: inline-block;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .telegram-link:hover {
+            transform: scale(1.05);
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .badge {
+            background: #ffd700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .address {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+
+margin: 20px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            border: 2px dashed #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">🔧 Работаем с 2024 года</div>
+        <h1>CompService</h1>
+        <div class="subtitle">Мастерская Захара</div>
+        
+        <div class="address">
+            📍 Ипатово, улица Ленина 80в
+        </div>
+        
+        <div class="services">
+            <h2 style="margin-bottom: 20px; color: #333;">📋 Наши услуги</h2>
+            
+            <div class="service-item">
+                <span class="service-name">💻 Замена термопасты</span>
+                <span class="service-price">500 ₽</span>
+            </div>
+            
+            <div class="service-item">
+                <span class="service-name">🧹 Чистка от пыли</span>
+                <span class="service-price">500 ₽</span>
+            </div>
+            
+            <div class="service-item">
+                <span class="service-name">🔍 Диагностика</span>
+                <span class="service-price">100 ₽</span>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <h3>📱 Свяжитесь со мной</h3>
+            <a href="https://t.me/zaharzdrav01" class="telegram-link" target="_blank">
+                ✈️ Telegram: @zaharzdrav01
+            </a>
+            <p style="color: white; margin-top: 15px; opacity: 0.9;">
+                Напишите - договоримся о времени
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>📍 Ипатово, ул. Ленина 80в | Ежедневно с 10:00 до 20:00</p>
+            <p style="margin-top: 10px;">⚡ Быстро, качественно, недорого</p>
+        </div>
+    </div>
+</body>
+</html>
