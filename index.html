@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чистка ПК | Ипатово</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0a0f1a;
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            background-image: 
+                radial-gradient(2px 2px at 10px 10px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 30px 140px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 240px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 220px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 280px 360px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 350px 150px, #fffa, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 480px 450px, #fffa, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 600px 200px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 750px 380px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 830px 120px, #eee, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 950px 520px, #fffa, rgba(0,0,0,0));
+            background-size: 1200px 1200px;
+            background-repeat: repeat;
+            opacity: 0.7;
+            animation: moveStars 250s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes moveStars {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-800px) translateX(200px); }
+        }
+
+        .header {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 20, 30, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #3f5f8f;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #80b4ff, #c49bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav a {
+            color: #bcd2ff;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav a:hover {
+            color: white;
+            text-shadow: 0 0 10px #6a9eff;
+        }
+
+        .city a {
+            background: #1d3145;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid #5f85b5;
+            color: #bcd2ff;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .city a:hover {
+            background: #2a3f60;
+            border-color: #80b4ff;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: #b0d0ff;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #c9dfff;
+            margin: 20px 0;
+        }
+
+        .hero-emoji {
+            font-size: 10rem;
+            filter: drop-shadow(0 0 30px #6a9eff);
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(20, 30, 45, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #4b6d94;
+            border-radius: 40px;
+            padding: 30px;
+            width: 300px;
+            transition: 0.3s;
+            box-shadow: 0 20px 30px #00000070;
+        }
+
+        .card:hover {
+            border-color: #003cff;
+            box-shadow: 0 0 30px #003cff, 0 0 60px #001a77;
+            background: rgba(0, 20, 50, 0.9);
+            transform: scale(1.02);
+        }
+
+        .card h3 {
+            font-size: 2rem;
+            color: #ffd68a;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #d3e2ff;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #a3ffa3;
+            margin: 20px 0 10px;
+        }
+
+        .reviews {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #b3d6ff;
+            margin-bottom: 40px;
+        }
+
+        .review-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .review-card {
+            background: rgba(30, 40, 60, 0.8);
+            backdrop-filter: blur(6px);
+            border: 1px solid #6b8bb8;
+            border-radius: 30px;
+            padding: 25px;
+            width: 300px;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #f0f4ff;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #ffe792;
+        }
+
+        .btn {
+            background: #3f6bbf;
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: 15px 50px;
+            border-radius: 80px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: fit-content;
+            margin: 20px auto 40px;
+            transition: 0.2s;
+            box-shadow: 0 10px 30px #1f3f7f;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #5c80d0;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #3f6bbf;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #2e4a6a;
+            background: rgba(0,0,0,0.3);
+            color: #b3ceff;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="header">
+        <div class="logo">🛠️ CompService</div>
+        <div class="nav">
+            <a href="#home">Главная</a>
+            <a href="#services">Услуги</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+        <div class="city">
+            <a href="https://www.google.com/maps/search/?api=1&query=Ипатово+Ставропольский+край" target="_blank">📍 Ипатово</a>
+        </div>
+    </div>
+
+    <div id="home" class="hero">
+        <div>
+            <h1>ЧИСТКА И ОБСЛУЖИВАНИЕ<br><span>КОМПЬЮТЕРОВ</span> В ИПАТОВО</h1>
+            <p>Качественная чистка, замена термопасты, обслуживание Xbox и моноблоков.</p>
+        </div>
+        <div class="hero-emoji">🧹</div>
+    </div>
+
+    <div id="services" class="services">
+        <div class="card">
+            <h3>🧹 Чистка от пыли</h3>
+            <p>Полная разборка, продувка, смазка кулеров. Система дышит как новая.</p>
+            <div class="price">от 500 ₽</div>
+        </div>
+        <div class="card">
+            <h3>🌡️ Замена термопасты</h3>
+            <p>Процессор, видеокарта — паста MX-4 / GD900. Температуры падают.</p>
+            <div class="price">от 500 ₽</div>
+        </div>
+        <div class="card">
+            <h3>🕹️ Обслуживание Xbox/моноблоков</h3>
+            <p>Разбирал Xbox One S, моноблоки — есть опыт. Аккуратно и бережно.</p>
+            <div class="price">договорная</div>
+        </div>
+    </div>
+
+    <div id="reviews" class="reviews">
+        <h2>💬 ОТЗЫВЫ</h2>
+        <div class="review-cards">
+            <div class="review-card">
+                <div class="review-text">«Почистил моноблок, заменил пасту. Стал тише работать и греется меньше. Всё супер!»</div>
+                <div class="review-author">— Сергей, Ипатово</div>
+            </div>
+            <div class="review-card">
+                <div class="review-text">«Разобрал Xbox One S, продул, смазал кулер. Консоль перестала шуметь как пылесос. Рекомендую!»</div>
+                <div class="review-author">— Дмитрий</div>
+            </div>
+            <div class="review-card">
+                <div class="review-text">«Помог с апгрейдом — поставил SSD, добавил оперативки. Всё работает отлично. Цены адекват.»</div>
+                <div class="review-author">— Анна</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contacts">
+        <a href="https://t.me/zaharzdrav01" class="btn">📲 СВЯЗАТЬСЯ (TELEGRAM)</a>
+    </div>
+
+    <div class="footer">
+        © 2025 CompService | Ипатово | Без пафоса, с заботой
+    </div>
+
+    <!-- КНОПКА ЗАКАЗА ЗВОНКА -->
+    <div style="position: fixed; bottom: 30px; right: 30px; z-index: 999;">
+        <button onclick="openCallForm()" style="background: #00aa55; border: none; border-radius: 60px; padding: 15px 30px; color: white; font-weight: bold; font-size: 1.3rem; cursor: pointer; box-shadow: 0 0 30px #00aa55;">
+            📞 ЗАКАЗАТЬ ЗВОНОК
+        </button>
+    </div>
+
+    <!-- ФОРМА ЗВОНКА -->
+    <div id="callForm" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: #1a2a3f; padding: 40px; border-radius: 60px; max-width: 400px; width: 90%; border: 3px solid #00aa55;">
+            <h3 style="color: #00aa55; margin-bottom: 20px;">📞 ВВЕДИ НОМЕР</h3>
+            <input type="tel" id="phoneNumber" placeholder="+7 (999) 123-45-67" style="width: 100%; padding: 15px; font-size: 1.3rem; border-radius: 40px; border: none; margin-bottom: 20px;">
+            <button onclick="sendCallRequest()" style="background: #00aa55; color: white; border: none; padding: 15px; width: 100%; border-radius: 60px; font-size: 1.5rem; font-weight: bold; cursor: pointer;">ОТПРАВИТЬ</button>
+            <button onclick="closeCallForm()" style="background: #555; margin-top: 10px; color: white; border: none; padding: 10px; width: 100%; border-radius: 60px;">ЗАКРЫТЬ</button>
+        </div>
+    </div>
+
+    <script>
+    function openCallForm() {
+        document.getElementById('callForm').style.display = 'flex';
+    }
+
+    function closeCallForm() {
+        document.getElementById('callForm').style.display = 'none';
+    }
+
+    function sendCallRequest() {
+        const phone = document.getElementById('phoneNumber').value;
+        if (phone.length < 10) {
+            alert('Введите корректный номер');
+            return;
+        }
+
+        const TELEGRAM_TOKEN = '8789104529:AAEvK2zG89lYbr16y-XNWm_18QkGINdWNY8';
+        const CHAT_ID = '5008562486';
+        const text = `📞 Заказ звонка: ${phone}`;
+
+        // Работает всегда и везде
+        const img = new Image();
+        img.src = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
+        
+        alert('✅ Заявка отправлена! Я перезвоню скоро.');
+        document.getElementById('phoneNumber').value = '';
+        closeCallForm();
+    }
+    </script>
+</body>
+</html>
