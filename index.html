@@ -15,41 +15,43 @@
         body {
             background: #0a0f1a;
             color: #fff;
-            overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Анимированный фон (звёзды) */
-        .stars, .twinkling {
+        /* Звёздный фон (чистый CSS без внешних файлов) */
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: transparent;
+            background-image: 
+                radial-gradient(2px 2px at 10px 10px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 30px 140px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 240px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 220px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 280px 360px, #fff, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 350px 150px, #fffa, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 480px 450px, #fffa, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 600px 200px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 750px 380px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 830px 120px, #eee, rgba(0,0,0,0)),
+                radial-gradient(4px 4px at 950px 520px, #fffa, rgba(0,0,0,0));
+            background-size: 1200px 1200px;
+            background-repeat: repeat;
+            opacity: 0.7;
+            animation: moveStars 250s linear infinite;
             z-index: -1;
+            pointer-events: none;
         }
 
-        .stars {
-            background: #0a0f1a url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48Y2lyY2xlIGN4PSI2IiBjeT0iMTQiIHI9IjEiIGZpbGw9IndoaXRlIiAvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjYwIiByPSIxLjUiIGZpbGw9IndoaXRlIiAvPjxjaXJjbGUgY3g9IjQwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSJ3aGl0ZSIgLz48Y2lyY2xlIGN4PSIyODAiIGN5PSI4MCIgcj0iMSIgZmlsbD0id2hpdGUiIC8+PC9zdmc+');
-            background-size: 300px 300px;
-            animation: starsMove 60s linear infinite;
-            opacity: 0.5;
-        }
-
-        .twinkling {
-            background: transparent url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjUwIiByPSIyIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjgiIC8+PC9zdmc+');
-            background-size: 500px 500px;
-            animation: twinkle 4s infinite;
-        }
-
-        @keyframes starsMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 300px 300px; }
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
+        @keyframes moveStars {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-800px) translateX(200px); }
         }
 
         /* Шапка */
@@ -58,8 +60,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 20, 30, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(10, 20, 30, 0.85);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid #3f5f8f;
             position: sticky;
             top: 0;
@@ -87,35 +89,32 @@
             text-shadow: 0 0 10px #6a9eff;
         }
 
-        .city {
+        .city a {
             background: #1d3145;
             padding: 8px 18px;
             border-radius: 30px;
             border: 1px solid #5f85b5;
-            cursor: pointer;
+            color: #bcd2ff;
+            text-decoration: none;
             transition: 0.2s;
+            display: inline-block;
         }
 
-        .city:hover {
+        .city a:hover {
             background: #2a3f60;
             border-color: #80b4ff;
             transform: scale(1.05);
         }
 
-        .city a {
-            color: #bcd2ff;
-            text-decoration: none;
-        }
-
         /* Главная */
         .hero {
-            padding: 60px 30px 20px;
+            padding: 60px 30px;
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
         .hero h1 {
@@ -131,15 +130,14 @@
             font-size: 1.3rem;
             color: #c9dfff;
             margin: 20px 0;
-            max-width: 600px;
         }
 
-        .hero-emoji {
+.hero-emoji {
             font-size: 10rem;
             filter: drop-shadow(0 0 30px #6a9eff);
         }
 
-/* Карточки услуг */
+        /* Услуги */
         .services {
             display: flex;
             flex-wrap: wrap;
@@ -152,13 +150,13 @@
 
         .card {
             background: rgba(20, 30, 45, 0.8);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             border: 1px solid #4b6d94;
             border-radius: 40px;
             padding: 30px;
             width: 300px;
-            box-shadow: 0 20px 30px #00000070;
             transition: 0.3s;
+            box-shadow: 0 20px 30px #00000070;
         }
 
         .card:hover {
@@ -228,22 +226,23 @@
             color: #ffe792;
         }
 
-        /* Кнопка */
+        /* Кнопка связи */
         .btn {
             background: #3f6bbf;
-            border: none;
             font-size: 1.6rem;
             font-weight: bold;
             padding: 15px 50px;
             border-radius: 80px;
             color: white;
-            cursor: pointer;
-            box-shadow: 0 10px 30px #1f3f7f;
-            margin: 20px auto 40px;
-            display: block;
-            transition: 0.2s;
             text-decoration: none;
+            display: block;
             width: fit-content;
+            margin: 20px auto 40px;
+            transition: 0.2s;
+            box-shadow: 0 10px 30px #1f3f7f;
+            border: none;
+            cursor: pointer;
+            text-align: center;
         }
 
         .btn:hover {
@@ -252,6 +251,7 @@
             box-shadow: 0 0 30px #3f6bbf;
         }
 
+        /* Подвал */
         .footer {
             text-align: center;
             padding: 25px;
@@ -263,7 +263,6 @@
 </head>
 <body>
     <div class="stars"></div>
-    <div class="twinkling"></div>
 
     <div class="header">
         <div class="logo">🛠️ CompService</div>
@@ -286,9 +285,8 @@
         <div class="hero-emoji">🧹</div>
     </div>
 
-    <div id="services" class="services">
-
-<div class="card">
+<div id="services" class="services">
+        <div class="card">
             <h3>🧹 Чистка от пыли</h3>
             <p>Полная разборка, продувка, смазка кулеров. Система дышит как новая.</p>
             <div class="price">от 500 ₽</div>
