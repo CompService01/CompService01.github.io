@@ -2,708 +2,347 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CompService | Мастерская в Ипатово</title>
+    <title>Чистка и ремонт ПК | Ипатово</title>
     <style>
-        /* ===== ОЧЕНЬ СЛОЖНЫЙ И КРУТОЙ ДИЗАЙН ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', 'Arial', sans-serif;
-            background: #0a0f1e;
+            background: #0a0f1a;
             color: #fff;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* ===== ЛЕТАЮЩИЕ КОМПЬЮТЕРЫ НА ФОНЕ ===== */
-        .floating-computers {
+        /* Анимированный фон (звёзды) */
+        .stars, .twinkling {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
+            z-index: -1;
         }
 
-        .float-item {
-            position: absolute;
-            font-size: 3rem;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-            color: #4a90e2;
-            user-select: none;
+        .stars {
+            background: #0a0f1a url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48Y2lyY2xlIGN4PSI2IiBjeT0iMTQiIHI9IjEiIGZpbGw9IndoaXRlIiAvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjYwIiByPSIxLjUiIGZpbGw9IndoaXRlIiAvPjxjaXJjbGUgY3g9IjQwIiBjeT0iMjAwIiByPSIxIiBmaWxsPSJ3aGl0ZSIgLz48Y2lyY2xlIGN4PSIyODAiIGN5PSI4MCIgcj0iMSIgZmlsbD0id2hpdGUiIC8+PC9zdmc+');
+            background-size: 300px 300px;
+            animation: starsMove 60s linear infinite;
+            opacity: 0.5;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.8);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.2;
-            }
-            90% {
-                opacity: 0.2;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg) scale(1.2);
-                opacity: 0;
-            }
+        .twinkling {
+            background: transparent url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjUwIiByPSIyIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIwLjgiIC8+PC9zdmc+');
+            background-size: 500px 500px;
+            animation: twinkle 4s infinite;
         }
 
-        .float-item:nth-child(1) { left: 5%; animation-duration: 18s; animation-delay: 0s; }
-        .float-item:nth-child(2) { left: 15%; animation-duration: 22s; animation-delay: 2s; }
-        .float-item:nth-child(3) { left: 25%; animation-duration: 25s; animation-delay: 4s; }
-        .float-item:nth-child(4) { left: 35%; animation-duration: 20s; animation-delay: 1s; }
-        .float-item:nth-child(5) { left: 45%; animation-duration: 23s; animation-delay: 3s; }
-        .float-item:nth-child(6) { left: 55%; animation-duration: 19s; animation-delay: 5s; }
-        .float-item:nth-child(7) { left: 65%; animation-duration: 24s; animation-delay: 2.5s; }
-        .float-item:nth-child(8) { left: 75%; animation-duration: 21s; animation-delay: 4.5s; }
-        .float-item:nth-child(9) { left: 85%; animation-duration: 26s; animation-delay: 1.5s; }
-        .float-item:nth-child(10) { left: 95%; animation-duration: 17s; animation-delay: 3.5s; }
-
-        /* ===== ОСНОВНОЙ КОНТЕНТ ПОВЕРХ ФОНА ===== */
-        .content {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
+        @keyframes starsMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 300px 300px; }
         }
 
-        /* ===== НАВИГАЦИЯ ===== */
-        nav {
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        /* Шапка */
+        .header {
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            background: rgba(10,15,30,0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 30px;
+            background: rgba(10, 20, 30, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #3f5f8f;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #4a90e2, #9b59b6);
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #80b4ff, #c49bff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: #fff;
+        .nav a {
+            color: #bcd2ff;
             text-decoration: none;
+            margin-left: 25px;
             font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            padding: 5px 0;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #4a90e2, #9b59b6);
-            transition: width 0.3s;
-        }
-.nav-links a:hover::after {
-            width: 100%;
+        .city {
+            background: #1d3145;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid #5f85b5;
         }
 
-        .nav-links a:hover {
-            transform: translateY(-2px);
-        }
-
-        /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+        /* Главная */
         .hero {
+            padding: 60px 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            min-height: 60vh;
-            margin-bottom: 80px;
-            flex-wrap: wrap;
-            gap: 40px;
-            background: rgba(10,15,30,0.5);
-            backdrop-filter: blur(5px);
-            border-radius: 30px;
-            padding: 40px;
         }
 
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .hero-text h1 {
-            font-size: 64px;
+        .hero h1 {
+            font-size: 3.5rem;
             font-weight: 800;
-            background: linear-gradient(45deg, #fff, #4a90e2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            line-height: 1.1;
         }
 
-        .hero-text p {
-            font-size: 20px;
-            color: rgba(255,255,255,0.8);
+        .hero h1 span {
+            color: #b0d0ff;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #c9dfff;
+            margin: 20px 0;
+            max-width: 600px;
+        }
+
+        .hero-emoji {
+            font-size: 10rem;
+            filter: drop-shadow(0 0 30px #6a9eff);
+        }
+
+        /* Карточки услуг */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(20, 30, 45, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #4b6d94;
+            border-radius: 40px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 20px 30px #00000070;
+        }
+
+.card h3 {
+            font-size: 2rem;
+            color: #ffd68a;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #d3e2ff;
+            line-height: 1.6;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #a3ffa3;
+            margin: 20px 0 10px;
+        }
+
+        .badge {
+            background: #2d4d73;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        /* Секция "Честно" */
+        .honest {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .honest h2 {
+            font-size: 2.5rem;
+            color: #ffdb9a;
             margin-bottom: 30px;
         }
 
-        .hero-stats {
+        .honest-grid {
             display: flex;
-            gap: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: #4a90e2;
-        }
-
-        .stat-label {
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
-        }
-
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        /* ===== СЕКЦИИ ===== */
-        section {
-            margin-bottom: 100px;
-            background: rgba(20,25,40,0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .section-title {
-            font-size: 42px;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(45deg, #4a90e2, transparent);
-        }
-
-        /* ===== УСЛУГИ ===== */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: rgba(30,35,50,0.9);
-            border-radius: 20px;
-            padding: 30px;
-            transition: all 0.4s;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: left 0.5s;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(74,144,226,0.2);
-            border-color: #4a90e2;
-        }
-
-        .service-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .service-name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #4a90e2;
-        }
-
-        .service-desc {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }.service-price {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #4a90e2, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* ===== ПРАЙС-ЛИСТ ===== */
-        .price-table {
-            display: grid;
-            gap: 15px;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            background: rgba(30,35,50,0.9);
-            border-radius: 50px;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .price-item:hover {
-            transform: scale(1.02);
-            background: rgba(40,45,60,0.9);
-            border-color: #4a90e2;
-        }
-
-        .price-name {
-            font-size: 18px;
-            font-weight: 500;
-        }
-
-        .price-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #4a90e2;
-        }
-
-        /* ===== ПОЧЕМУ МЫ ===== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 30px;
-            background: rgba(30,35,50,0.9);
-            border-radius: 20px;
-        }
-
-        .feature-number {
-            font-size: 48px;
-            font-weight: 800;
-            color: rgba(74,144,226,0.3);
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #4a90e2;
-        }
-
-        /* ===== КОНТАКТЫ ===== */
-        .contact-section {
-            text-align: center;
-        }
-
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
             gap: 20px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 20px 50px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 24px;
-            transition: all 0.3s;
-            background: rgba(30,35,50,0.9);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .contact-btn:hover {
-            transform: scale(1.05);
-            background: #4a90e2;
-            box-shadow: 0 0 30px #4a90e2;
-        }
-
-        .contact-info {
-            display: flex;
             justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            font-size: 18px;
-            color: rgba(255,255,255,0.8);
         }
 
-        .contact-info i {
-            color: #4a90e2;
-            margin-right: 10px;
+        .honest-item {
+            background: #1b2940;
+            border-radius: 60px;
+            padding: 16px 30px;
+            border: 1px solid #6a8cc0;
         }
 
-        /* ===== ПОДВАЛ ===== */
-        footer {
+        /* Отзывы */
+        .reviews {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews h2 {
             text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.5);
+            font-size: 2.5rem;
+            color: #b3d6ff;
+            margin-bottom: 40px;
         }
 
-        /* ===== АДАПТАЦИЯ ===== */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .hero-text h1 {
-                font-size: 48px;
-            }
-            
-            .section-title {
-                font-size: 32px;
-            }
-            
-            .price-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-                border-radius: 20px;
-            }
+        .review-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .review-card {
+            background: rgba(30, 40, 60, 0.8);
+            backdrop-filter: blur(6px);
+            border: 1px solid #6b8bb8;
+            border-radius: 30px;
+            padding: 25px;
+            width: 300px;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #f0f4ff;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: #ffe792;
+        }
+
+        /* Кнопка */
+        .btn {
+            background: #3f6bbf;
+            border: none;
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: 15px 50px;
+            border-radius: 80px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 30px #1f3f7f;
+            margin: 20px auto 40px;
+            display: block;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #5c80d0;
+            transform: scale(1.03);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid #2e4a6a;
+            background: rgba(0,0,0,0.3);
+            color: #b3ceff;
         }
     </style>
 </head>
 <body>
-    <!-- ЛЕТАЮЩИЕ КОМПЬЮТЕРЫ НА ФОНЕ --><div class="floating-computers">
-        <div class="float-item">💻</div>
-        <div class="float-item">🖥️</div>
-        <div class="float-item">📱</div>
-        <div class="float-item">⌨️</div>
-        <div class="float-item">🖱️</div>
-        <div class="float-item">💿</div>
-        <div class="float-item">🔧</div>
-        <div class="float-item">⚙️</div>
-        <div class="float-item">💾</div>
-        <div class="float-item">🖨️</div>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+
+    <div class="header">
+        <div class="logo">🛠️ CompService</div>
+        <div class="nav">
+            <a href="#">Главная</a>
+            <a href="#">Услуги</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Контакты</a>
+        </div>
+        <div class="city">📍 Ипатово</div>
     </div>
 
-    <div class="content">
-        <!-- НАВИГАЦИЯ -->
-        <nav>
-            <div class="logo">CompService</div>
-            <div class="nav-links">
-                <a href="#home">Главная</a>
-                <a href="#services">Услуги</a>
-                <a href="#prices">Прайс</a>
-                <a href="#features">Почему мы</a>
-                <a href="#contact">Контакты</a>
+    <div class="hero">
+        <div>
+            <h1>ЧИСТКА И ОБСЛУЖИВАНИЕ<br><span>КОМПЬЮТЕРОВ</span> В ИПАТОВО</h1>
+            <p>Не собираю ПК под ключ, но качественно обслуживаю: чистка, замена термопасты, ремонт, апгрейд.</p>
+            <div style="display: flex; gap: 15px;">
+                <span class="badge">✅ 3 довольных клиента</span>
+                <span class="badge">⚡ опыт 2 года</span>
             </div>
-        </nav>
-
-        <!-- ГЛАВНАЯ -->
-        <section id="home" class="hero">
-            <div class="hero-text">
-                <h1>CompService<br>в Ипатово</h1>
-                <p>Профессиональное обслуживание компьютеров, ноутбуков и комплектующих. Быстро, качественно, с гарантией.</p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">150+</div>
-                        <div class="stat-label">довольных клиентов</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">3 года</div>
-                        <div class="stat-label">опыта работы</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">поддержка</div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-image">
-                <!-- Просто для красоты, можно заменить на реальное фото -->
-                <div style="width: 100%; height: 400px; background: linear-gradient(45deg, #4a90e2, #9b59b6); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 100px;">
-                    🖥️
-                </div>
-            </div>
-        </section>
-
-        <!-- УСЛУГИ (ПОДРОБНО) -->
-        <section id="services">
-            <h2 class="section-title">Наши услуги</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">💻</div>
-                    <div class="service-name">Замена термопасты</div>
-                    <div class="service-desc">Профессиональная замена термопасты на процессоре и чипсете. Используем Arctic Cooling MX-4.</div>
-                    <div class="service-price">от 500 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🧹</div>
-                    <div class="service-name">Чистка от пыли</div>
-                    <div class="service-desc">Полная чистка системного блока или ноутбука с продувкой всех компонентов.</div>
-                    <div class="service-price">от 500 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔄</div>
-                    <div class="service-name">Замена комплектующих</div>
-                    <div class="service-desc">Замена процессора, видеокарты, оперативной памяти, блока питания и других компонентов.</div>
-                    <div class="service-price">от 300 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💾</div>
-                    <div class="service-name">Установка SSD/HHD</div>
-                    <div class="service-desc">Установка нового накопителя с переносом системы и данных.</div><div class="service-price">от 600 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🪟</div>
-                    <div class="service-name">Установка Windows</div>
-                    <div class="service-desc">Чистая установка Windows с установкой всех драйверов и базовых программ.</div>
-                    <div class="service-price">от 800 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <div class="service-name">Сборка ПК</div>
-                    <div class="service-desc">Сборка компьютера под ключ с кабель-менеджментом и настройкой BIOS.</div>
-                    <div class="service-price">от 1500 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📱</div>
-                    <div class="service-name">Обслуживание ноутбуков</div>
-                    <div class="service-desc">Чистка, замена термопасты, замена комплектующих в ноутбуках.</div>
-                    <div class="service-price">от 700 ₽</div>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <div class="service-name">Диагностика</div>
-                    <div class="service-desc">Полная диагностика оборудования с выдачей заключения.</div>
-                    <div class="service-price">от 100 ₽</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ПРАЙС-ЛИСТ (ПОЛНЫЙ) -->
-        <section id="prices">
-            <h2 class="section-title">Прайс-лист</h2>
-            <div class="price-table">
-                <div class="price-item">
-                    <span class="price-name">Чистка системного блока от пыли</span>
-                    <span class="price-value">500 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Чистка ноутбука от пыли</span>
-                    <span class="price-value">700 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена термопасты (процессор)</span>
-                    <span class="price-value">500 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена термопасты (ноутбук)</span>
-                    <span class="price-value">800 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена процессора</span>
-                    <span class="price-value">500 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена видеокарты</span>
-                    <span class="price-value">400 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена оперативной памяти</span>
-                    <span class="price-value">300 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена блока питания</span>
-                    <span class="price-value">500 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Замена кулера/системы охлаждения</span>
-                    <span class="price-value">400 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Установка SSD/HHD</span>
-                    <span class="price-value">600 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Установка Windows</span><span class="price-value">800 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Установка Linux</span>
-                    <span class="price-value">1000 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Сборка ПК под ключ</span>
-                    <span class="price-value">1500 - 3000 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Диагностика (простая)</span>
-                    <span class="price-value">100 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Диагностика (сложная)</span>
-                    <span class="price-value">300 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Настройка BIOS</span>
-                    <span class="price-value">300 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Установка драйверов</span>
-                    <span class="price-value">200 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Восстановление данных</span>
-                    <span class="price-value">от 500 ₽</span>
-                </div>
-                <div class="price-item">
-                    <span class="price-name">Консультация</span>
-                    <span class="price-value">Бесплатно</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ПОЧЕМУ МЫ -->
-        <section id="features">
-            <h2 class="section-title">Почему выбирают нас</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-number">01</div>
-                    <div class="feature-title">Опыт</div>
-                    <div style="color: rgba(255,255,255,0.6);">Более 3 лет успешной работы</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-number">02</div>
-                    <div class="feature-title">Качество</div>
-                    <div style="color: rgba(255,255,255,0.6);">Используем лучшие материалы</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-number">03</div>
-                    <div class="feature-title">Скорость</div>
-                    <div style="color: rgba(255,255,255,0.6);">Большинство работ за 1 час</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-number">04</div>
-                    <div class="feature-title">Гарантия</div>
-                    <div style="color: rgba(255,255,255,0.6);">Гарантия на все работы</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-number">05</div>
-                    <div class="feature-title">Цены</div>
-                    <div style="color: rgba(255,255,255,0.6);">Честные и прозрачные</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-number">06</div>
-                    <div class="feature-title">Поддержка</div>
-                    <div style="color: rgba(255,255,255,0.6);">Помогаем после ремонта</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- КОНТАКТЫ -->
-        <section id="contact" class="contact-section">
-            <h2 class="section-title">Свяжитесь со мной</h2>
-            
-            <div class="contact-buttons">
-                <a href="https://t.me/zaharzdrav01" class="contact-btn" target="_blank">✈️ Telegram
-                </a>
-                <a href="https://wa.me/79000000000" class="contact-btn" target="_blank">
-                    📱 WhatsApp
-                </a>
-            </div>
-            
-            <div class="contact-info">
-                <div><i>📍</i> Ипатово</div>
-                <div><i>⏰</i> Ежедневно 10:00 - 20:00</div>
-                <div><i>📱</i> Telegram: @zaharzdrav01</div>
-            </div>
-            
-            <div style="margin-top: 40px; font-size: 18px; background: rgba(74,144,226,0.1); padding: 20px; border-radius: 20px;">
-                ⚡️ Напишите в Telegram - договоримся о времени и запишем вас!
-            </div>
-        </section>
-
-        <!-- ПОДВАЛ -->
-        <footer>
-            <p>© 2024 CompService - Компьютерная мастерская в Ипатово</p>
-            <p style="margin-top: 10px;">Все права защищены</p>
-        </footer>
+        </div>
+        <div class="hero-emoji">🧹</div>
     </div>
 
-    <script>
-        // Плавный скролл при клике на меню
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const id = this.getAttribute('href');
-                document.querySelector(id).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+    <div class="services">
+        <div class="card">
+            <h3>🧹 Чистка от пыли</h3>
+            <p>Полная разборка, продувка, смазка кулеров. Система дышит как новая.</p>
+
+<div class="price">от 800 ₽</div>
+        </div>
+        <div class="card">
+            <h3>🌡️ Замена термопасты</h3>
+            <p>Процессор, видеокарта — паста MX-4 / GD900. Температуры падают.</p>
+            <div class="price">от 600 ₽</div>
+        </div>
+        <div class="card">
+            <h3>🕹️ Обслуживание Xbox/моноблоков</h3>
+            <p>Разбирал Xbox One S, моноблоки — есть опыт. Аккуратно и бережно.</p>
+            <div class="price">договорная</div>
+        </div>
+    </div>
+
+    <div class="honest">
+        <h2>ЧЕСТНО О СЕБЕ</h2>
+        <div class="honest-grid">
+            <div class="honest-item">🔧 ПК с нуля не собираю — занимаюсь обслуживанием</div>
+            <div class="honest-item">🧼 Разобрал, почистил, собрал 2 моноблока + Xbox</div>
+            <div class="honest-item">⭐ 3 клиента — все довольны</div>
+            <div class="honest-item">📅 Работаю 1–2 года, учусь, не халтурю</div>
+            <div class="honest-item">💸 Рассрочек нет — оплата при получении</div>
+        </div>
+    </div>
+
+    <div class="reviews">
+        <h2>💬 РЕАЛЬНЫЕ ОТЗЫВЫ</h2>
+        <div class="review-cards">
+            <div class="review-card">
+                <div class="review-text">«Почистил моноблок, заменил пасту. Стал тише работать и греется меньше. Всё супер!»</div>
+                <div class="review-author">— Сергей, Ипатово</div>
+            </div>
+            <div class="review-card">
+                <div class="review-text">«Разобрал Xbox One S, продул, смазал кулер. Консоль перестала шуметь как пылесос. Рекомендую!»</div>
+                <div class="review-author">— Дмитрий</div>
+            </div>
+            <div class="review-card">
+                <div class="review-text">«Помог с апгрейдом — поставил SSD, добавил оперативки. Всё работает отлично. Цены адекват.»</div>
+                <div class="review-author">— Анна</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn">📲 СВЯЗАТЬСЯ (WhatsApp/Telegram)</button>
+
+    <div class="footer">
+        © 2025 CompService | Ипатово | Без пафоса, с заботой
+    </div>
 </body>
 </html>
