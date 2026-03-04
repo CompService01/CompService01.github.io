@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Чистка и ремонт ПК | Ипатово</title>
+    <title>Чистка ПК | Ипатово</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -78,6 +79,12 @@
             text-decoration: none;
             margin-left: 25px;
             font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav a:hover {
+            color: white;
+            text-shadow: 0 0 10px #6a9eff;
         }
 
         .city {
@@ -85,6 +92,19 @@
             padding: 8px 18px;
             border-radius: 30px;
             border: 1px solid #5f85b5;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .city:hover {
+            background: #2a3f60;
+            border-color: #80b4ff;
+            transform: scale(1.05);
+        }
+
+        .city a {
+            color: #bcd2ff;
+            text-decoration: none;
         }
 
         /* Главная */
@@ -119,7 +139,7 @@
             filter: drop-shadow(0 0 30px #6a9eff);
         }
 
-        /* Карточки услуг */
+/* Карточки услуг */
         .services {
             display: flex;
             flex-wrap: wrap;
@@ -138,9 +158,17 @@
             padding: 30px;
             width: 300px;
             box-shadow: 0 20px 30px #00000070;
+            transition: 0.3s;
         }
 
-.card h3 {
+        .card:hover {
+            border-color: #003cff;
+            box-shadow: 0 0 30px #003cff, 0 0 60px #001a77;
+            background: rgba(0, 20, 50, 0.9);
+            transform: scale(1.02);
+        }
+
+        .card h3 {
             font-size: 2rem;
             color: #ffd68a;
             margin-bottom: 15px;
@@ -156,40 +184,6 @@
             font-weight: 800;
             color: #a3ffa3;
             margin: 20px 0 10px;
-        }
-
-        .badge {
-            background: #2d4d73;
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-        }
-
-        /* Секция "Честно" */
-        .honest {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .honest h2 {
-            font-size: 2.5rem;
-            color: #ffdb9a;
-            margin-bottom: 30px;
-        }
-
-        .honest-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .honest-item {
-            background: #1b2940;
-            border-radius: 60px;
-            padding: 16px 30px;
-            border: 1px solid #6a8cc0;
         }
 
         /* Отзывы */
@@ -248,11 +242,14 @@
             margin: 20px auto 40px;
             display: block;
             transition: 0.2s;
+            text-decoration: none;
+            width: fit-content;
         }
 
         .btn:hover {
             background: #5c80d0;
-            transform: scale(1.03);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #3f6bbf;
         }
 
         .footer {
@@ -271,37 +268,35 @@
     <div class="header">
         <div class="logo">🛠️ CompService</div>
         <div class="nav">
-            <a href="#">Главная</a>
-            <a href="#">Услуги</a>
-            <a href="#">Отзывы</a>
-            <a href="#">Контакты</a>
+            <a href="#home">Главная</a>
+            <a href="#services">Услуги</a>
+            <a href="#reviews">Отзывы</a>
+            <a href="#contacts">Контакты</a>
         </div>
-        <div class="city">📍 Ипатово</div>
+        <div class="city">
+            <a href="https://www.google.com/maps/search/?api=1&query=Ипатово+Ставропольский+край" target="_blank">📍 Ипатово</a>
+        </div>
     </div>
 
-    <div class="hero">
+    <div id="home" class="hero">
         <div>
             <h1>ЧИСТКА И ОБСЛУЖИВАНИЕ<br><span>КОМПЬЮТЕРОВ</span> В ИПАТОВО</h1>
-            <p>Не собираю ПК под ключ, но качественно обслуживаю: чистка, замена термопасты, ремонт, апгрейд.</p>
-            <div style="display: flex; gap: 15px;">
-                <span class="badge">✅ 3 довольных клиента</span>
-                <span class="badge">⚡ опыт 2 года</span>
-            </div>
+            <p>Качественная чистка, замена термопасты, обслуживание Xbox и моноблоков.</p>
         </div>
         <div class="hero-emoji">🧹</div>
     </div>
 
-    <div class="services">
-        <div class="card">
+    <div id="services" class="services">
+
+<div class="card">
             <h3>🧹 Чистка от пыли</h3>
             <p>Полная разборка, продувка, смазка кулеров. Система дышит как новая.</p>
-
-<div class="price">от 800 ₽</div>
+            <div class="price">от 500 ₽</div>
         </div>
         <div class="card">
             <h3>🌡️ Замена термопасты</h3>
             <p>Процессор, видеокарта — паста MX-4 / GD900. Температуры падают.</p>
-            <div class="price">от 600 ₽</div>
+            <div class="price">от 500 ₽</div>
         </div>
         <div class="card">
             <h3>🕹️ Обслуживание Xbox/моноблоков</h3>
@@ -310,19 +305,8 @@
         </div>
     </div>
 
-    <div class="honest">
-        <h2>ЧЕСТНО О СЕБЕ</h2>
-        <div class="honest-grid">
-            <div class="honest-item">🔧 ПК с нуля не собираю — занимаюсь обслуживанием</div>
-            <div class="honest-item">🧼 Разобрал, почистил, собрал 2 моноблока + Xbox</div>
-            <div class="honest-item">⭐ 3 клиента — все довольны</div>
-            <div class="honest-item">📅 Работаю 1–2 года, учусь, не халтурю</div>
-            <div class="honest-item">💸 Рассрочек нет — оплата при получении</div>
-        </div>
-    </div>
-
-    <div class="reviews">
-        <h2>💬 РЕАЛЬНЫЕ ОТЗЫВЫ</h2>
+    <div id="reviews" class="reviews">
+        <h2>💬 ОТЗЫВЫ</h2>
         <div class="review-cards">
             <div class="review-card">
                 <div class="review-text">«Почистил моноблок, заменил пасту. Стал тише работать и греется меньше. Всё супер!»</div>
@@ -339,7 +323,9 @@
         </div>
     </div>
 
-    <button class="btn">📲 СВЯЗАТЬСЯ (WhatsApp/Telegram)</button>
+    <div id="contacts">
+        <a href="https://t.me/zaharzdrav01" class="btn">📲 СВЯЗАТЬСЯ (TELEGRAM)</a>
+    </div>
 
     <div class="footer">
         © 2025 CompService | Ипатово | Без пафоса, с заботой
