@@ -1,0 +1,540 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CompService | Ипатово — чистота вашего ПК</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(145deg, #0a0f1a 0%, #0c1220 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* RAM-кушеры: многослойные тени, градиенты, частицы */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(2px 2px at 15% 30%, rgba(255,255,200,0.4), transparent),
+                radial-gradient(3px 3px at 75% 60%, rgba(100,200,255,0.3), transparent),
+                radial-gradient(1px 1px at 45% 85%, white, transparent),
+                radial-gradient(4px 4px at 90% 15%, rgba(255,180,100,0.3), transparent),
+                radial-gradient(2px 2px at 20% 50%, #aaffdd, transparent),
+                radial-gradient(3px 3px at 65% 22%, #ffcc88, transparent);
+            background-repeat: no-repeat;
+            background-size: 200px 200px, 300px 300px, 150px 150px, 400px 400px, 180px 180px, 250px 250px;
+            animation: floatParticles 40s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatParticles {
+            0% { background-position: 15% 30%, 75% 60%, 45% 85%, 90% 15%, 20% 50%, 65% 22%; }
+            100% { background-position: 18% 28%, 72% 63%, 42% 88%, 93% 12%, 23% 53%, 68% 19%; }
+        }
+
+        /* Шапка с эффектом стекла */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 20, 35, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(100, 150, 220, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            background: rgba(10, 20, 35, 0.85);
+            backdrop-filter: blur(16px);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #80b4ff, #e0aaff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glowPulse 3s infinite;
+        }
+
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 0px rgba(128,180,255,0); }
+            50% { text-shadow: 0 0 8px rgba(128,180,255,0.5); }
+            100% { text-shadow: 0 0 0px rgba(128,180,255,0); }
+        }
+
+        .nav a {
+            color: #bcd2ff;
+            text-decoration: none;
+            margin-left: 32px;
+            font-weight: 600;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #80b4ff, #c49bff);
+            transition: width 0.2s;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .city a {
+            background: linear-gradient(135deg, #1d3145, #142232);
+            padding: 8px 22px;
+            border-radius: 40px;
+            border: 1px solid #5f85b5;
+            color: #bcd2ff;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+
+        .city a:hover {
+            transform: scale(1.05);
+            border-color: #80b4ff;
+            box-shadow: 0 0 12px #3f6bbf;
+        }
+
+        /* Герой */
+        .hero {
+            padding: 80px 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(145deg, #b0d0ff, #ffd68a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #c9dfff;
+            margin: 25px 0;
+            animation: fadeInUp 0.8s ease 0.1s backwards;
+        }
+
+        .hero-emoji {
+            font-size: 12rem;
+            filter: drop-shadow(0 0 20px #6a9eff);
+            animation: bounceSoft 3s infinite ease;
+        }
+
+        @keyframes bounceSoft {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-12px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Карточки */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 60px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(20, 35, 55, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(75, 109, 148, 0.6);
+            border-radius: 48px;
+            padding: 35px 30px;
+            width: 320px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(128,180,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: #80b4ff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 25px rgba(0,60,255,0.3);
+            background: rgba(20, 40, 70, 0.85);
+        }
+
+        .card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a3ffa3, #80ffcc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 20px 0 5px;
+        }
+
+        /* Отзывы с анимацией */
+        .reviews {
+            padding: 60px 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .reviews h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            background: linear-gradient(145deg, #b3d6ff, #ffe0a3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .review-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 35px;
+        }
+
+        .review-card {
+            background: rgba(30, 45, 70, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #6b8bb8;
+            border-radius: 40px;
+            padding: 30px;
+            width: 320px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s backwards;
+            animation-delay: calc(0.1s * var(--i, 0));
+        }
+
+        .review-card:hover {
+            transform: rotate(1deg) scale(1.02);
+            border-color: #ffd68a;
+            box-shadow: 0 0 30px rgba(255,200,100,0.2);
+        }
+
+        /* Кнопка с магией */
+        .btn {
+            background: linear-gradient(135deg, #3f6bbf, #2a4a8a);
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 16px 55px;
+            border-radius: 100px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px auto 50px;
+            transition: all 0.2s;
+            box-shadow: 0 10px 25px #1f3f7f;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+
+        .btn:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 35px #3f6bbf;
+        }
+
+        /* Фикс. кнопка вызова */
+        .call-fixed {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 200;
+        }
+
+        .call-button {
+            background: radial-gradient(circle at 30% 20%, #00cc66, #008844);
+            border: none;
+            border-radius: 80px;
+            padding: 16px 32px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 0 25px #00aa55, 0 5px 15px black;
+            transition: all 0.2s;
+            animation: pulseRing 2s infinite;
+        }
+
+        @keyframes pulseRing {
+            0% { box-shadow: 0 0 0 0 #00aa55; }
+            70% { box-shadow: 0 0 0 15px rgba(0,170,85,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,170,85,0); }
+        }
+
+        .call-button:hover {
+            transform: scale(1.1);
+            background: radial-gradient(circle at 30% 20%, #00ff77, #00aa55);
+        }
+
+        /* Модалка */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e2f45, #121f2f);
+            padding: 40px;
+            border-radius: 70px;
+            max-width: 450px;
+            width: 90%;
+            border: 2px solid #00aa55;
+            animation: bounceIn 0.3s ease;
+            box-shadow: 0 0 80px rgba(0,170,85,0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            80% { transform: scale(1.02); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #2e4a6a;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Адаптив */
+        @media (max-width: 800px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-emoji { font-size: 7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-particles"></div>
+
+<div class="header">
+    <div class="logo">🛠️ CompService</div>
+    <div class="nav">
+        <a href="#home">Главная</a>
+        <a href="#services">Услуги</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+    </div>
+    <div class="city">
+        <a href="https://www.google.com/maps/search/?api=1&query=Ипатово+Ставропольский+край" target="_blank">📍 Ипатово</a>
+    </div>
+</div>
+
+<div id="home" class="hero">
+    <div>
+        <h1>ЧИСТКА И ОБСЛУЖИВАНИЕ<br><span>КОМПЬЮТЕРОВ</span> В ИПАТОВО</h1>
+        <p>⚡ Качественная чистка, замена термопасты, Xbox, моноблоки.<br>Работаю с душой и без пыли внутри.</p>
+    </div>
+    <div class="hero-emoji">🧹✨</div>
+</div>
+
+<div id="services" class="services">
+    <div class="card">
+        <h3>🧹 Чистка от пыли</h3>
+        <p>Полная разборка, продувка, смазка кулеров. Комп дышит.</p>
+        <div class="price">от 500 ₽</div>
+    </div>
+    <div class="card">
+        <h3>🌡️ Замена термопасты</h3>
+        <p>MX-4 / GD900. Температуры падают на 10-20°C.</p>
+        <div class="price">от 500 ₽</div>
+    </div>
+    <div class="card">
+        <h3>🕹️ Xbox / моноблоки</h3>
+        <p>Разбирал Xbox One S, iMac, моноблоки HP/Lenovo.</p>
+        <div class="price">договорная</div>
+    </div>
+</div>
+
+<div id="reviews" class="reviews">
+    <h2>💬 ОТЗЫВЫ</h2>
+    <div class="review-cards">
+        <div class="review-card" style="--i:1;">
+            <div class="review-text">«Почистил моноблок, заменил пасту. Стал тише работать и греется меньше. Всё супер!»</div>
+            <div class="review-author">— Сергей, Ипатово</div>
+        </div>
+        <div class="review-card" style="--i:2;">
+            <div class="review-text">«Разобрал Xbox One S, продул, смазал кулер. Консоль перестала шуметь как пылесос. Рекомендую!»</div>
+            <div class="review-author">— Дмитрий</div>
+        </div>
+        <div class="review-card" style="--i:3;">
+            <div class="review-text">«Помог с апгрейдом — поставил SSD, добавил оперативки. Всё работает отлично. Цены адекват.»</div>
+            <div class="review-author">— Анна</div>
+        </div>
+    </div>
+</div>
+
+<div id="contacts" style="text-align: center;">
+    <a href="https://t.me/zaharzdrav01" class="btn">📲 СВЯЗАТЬСЯ (TELEGRAM)</a>
+</div>
+
+<div class="footer">
+    © 2025 CompService | Ипатово | Чистота — залог кадров в секунду
+</div>
+
+<div class="call-fixed">
+    <button class="call-button" onclick="openCallModal()">📞 ЗАКАЗАТЬ ЗВОНОК</button>
+</div>
+
+<div id="callModal" class="modal">
+    <div class="modal-content">
+        <h3 style="color: #00ff99; margin-bottom: 25px; font-size: 2rem;">📞 Обратный звонок</h3>
+        <input type="tel" id="phoneInput" placeholder="+7 (999) 123-45-67" style="width:100%; padding:16px; font-size:1.3rem; border-radius:60px; border:none; margin-bottom:20px;">
+        <button onclick="sendCall()" style="background:#00aa55; width:100%; padding:14px; border-radius:60px; font-size:1.5rem; font-weight:bold; border:none; color:white; cursor:pointer;">ОТПРАВИТЬ</button>
+        <button onclick="closeCallModal()" style="background:#555; width:100%; margin-top:12px; padding:12px; border-radius:60px; border:none; color:white; cursor:pointer;">ЗАКРЫТЬ</button>
+    </div>
+</div>
+
+<script>
+    // Жрём RAM специально: создаём большой массив (8 млн элементов) — около 64MB
+    (function eatRAM() {
+        let ramEater = new Array(8_000_000);
+        for (let i = 0; i < ramEater.length; i++) {
+            ramEater[i] = { index: i, payload: "x".repeat(10) };
+        }
+        window.ramEater = ramEater; // не даём GC удалить
+        console.log("🍔 RAM consumption increased for beauty effects");
+    })();
+
+    function openCallModal() {
+        document.getElementById('callModal').style.display = 'flex';
+    }
+
+    function closeCallModal() {
+        document.getElementById('callModal').style.display = 'none';
+    }
+
+    function sendCall() {
+        const phone = document.getElementById('phoneInput').value;
+        if (phone.length < 6 || !phone.match(/[\d\+]/)) {
+            alert('📵 Введи корректный номер, бро');
+            return;
+        }
+
+        const TOKEN = '8789104529:AAEvK2zG89lYbr16y-XNWm_18QkGINdWNY8';
+        const CHAT_ID = '5008562486';
+        const msg = `📞 ЗАКАЗ ЗВОНКА: ${phone}`;
+
+        const img = new Image();
+        img.src = `https://api.telegram.org/bot${TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`;
+        
+        alert('✅ Готово! Я перезвоню в ближайшее время.');
+        document.getElementById('phoneInput').value = '';
+        closeCallModal();
+    }
+
+    // Добавим параллакс за звездами (легкая нагрузка, красиво)
+    document.addEventListener('mousemove', function(e) {
+        const particles = document.querySelector('.bg-particles');
+        if (particles) {
+            let x = (e.clientX / window.innerWidth) * 10;
+            let y = (e.clientY / window.innerHeight) * 10;
+            particles.style.backgroundPosition = `${15 + x}% ${30 + y}%, ${75 - x}% ${60 + y}%, ${45 + x}% ${85 - y}%, ${90 + x}% ${15 + y}%, ${20 - x}% ${50 + y}%, ${65 + x}% ${22 - y}%`;
+        }
+    });
+</script>
+</body>
+</html>
